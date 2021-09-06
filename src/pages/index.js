@@ -17,7 +17,7 @@ const ImageGallery = () => {
           childImageSharp {
             gatsbyImageData(
               layout: FULL_WIDTH
-              quality: 10
+              quality: 100
               placeholder: BLURRED
               formats: [AUTO, WEBP, AVIF]
             )
