@@ -17,6 +17,7 @@
   "dependencies": {
     "@robinmetral/gatsby-source-s3": "^2.1.1",
     "gatsby": "^3.13.0",
+    "gatsby-cli": "^3.13.0",
     "gatsby-plugin-image": "^1.13.0",
     "gatsby-plugin-sharp": "^3.13.0",
     "gatsby-transformer-sharp": "^3.13.0",
