@@ -43,12 +43,14 @@ const ImageGallery = () => {
       <LightGallery
         elementClassNames="custom-wrapper-class"
         plugins={[lgThumbnail, lgZoom]}
+        exThumbImage= 'data-external-thumb-image'
       // onBeforeSlide={onBeforeSlide}
       >
         {images.map((node, index) => {
           return (
             <div
 							key={index}
+              data-external-thumb-image={getImage(node.thumbnail).images.fallback.src}
 							data-srcset={getImage(node.large).images.fallback.srcSet}
 							data-sizes={getImage(node.large).images.fallback.sizes}
 							data-src={getImage(node.large).images.fallback.src}
