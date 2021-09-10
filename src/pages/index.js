@@ -39,7 +39,15 @@ const ImageGallery = () => {
       >
         {images.map((node, index) => {
           return (
-            <div key={index} data-src={getImage(node)} >
+            <div
+							key={index}
+							data-srcset={getImage(node).images.fallback.srcSet}
+							data-sizes={getImage(node).images.fallback.sizes}
+							data-src={getImage(node).images.fallback.src}
+							data-sources={JSON.stringify(
+								getImage(node).images.sources
+							)}
+						>
               <GatsbyImage image={getImage(node)} alt="" />
             </div>
           )
