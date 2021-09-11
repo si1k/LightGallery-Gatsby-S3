@@ -2,7 +2,9 @@ import * as React from "react"
 import { useStaticQuery, graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import LightGallery from 'lightgallery/react';
-
+// import plugins if you need
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
+import lgZoom from 'lightgallery/plugins/zoom';
 // import styles
 import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
@@ -15,7 +17,12 @@ const ImageGallery = () => {
       nodes {
         localFile {
           childImageSharp {
-            gatsbyImageData(
+            thumbnail: gatsbyImageData(
+              width: 400
+              placeholder: BLURRED
+              formats: [AUTO, WEBP, AVIF]
+            )
+            large: gatsbyImageData(
               layout: FULL_WIDTH
               quality: 100
               placeholder: BLURRED
@@ -35,12 +42,23 @@ const ImageGallery = () => {
     <div className="App">
       <LightGallery
         elementClassNames="custom-wrapper-class"
+        plugins={[lgThumbnail, lgZoom]}
+        exThumbImage= 'data-external-thumb-image'
       // onBeforeSlide={onBeforeSlide}
       >
         {images.map((node, index) => {
           return (
-            <div key={index} data-src={getImage(node)} >
-              <GatsbyImage image={getImage(node)} alt="" />
+            <div
+							key={index}
+              data-external-thumb-image={getImage(node.thumbnail).images.fallback.src}
+							data-srcset={getImage(node.large).images.fallback.srcSet}
+							data-sizes={getImage(node.large).images.fallback.sizes}
+							data-src={getImage(node.large).images.fallback.src}
+							data-sources={JSON.stringify(
+								getImage(node.large).images.sources
+							)}
+						>
+              <GatsbyImage image={getImage(node.thumbnail)} alt="" />
             </div>
           )
         })}
